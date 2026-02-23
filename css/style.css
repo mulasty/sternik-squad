@@ -752,6 +752,51 @@ main {
   filter: saturate(0.96) brightness(0.86);
 }
 
+.section--videos {
+  background:
+    linear-gradient(180deg, #0b1014 0%, #121922 46%, #0e141b 100%),
+    radial-gradient(circle at 16% 24%, rgba(255, 122, 26, 0.16), transparent 42%);
+}
+
+.videos-grid {
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 2.4vw, 1.4rem);
+}
+
+.video-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #0f151d;
+  box-shadow: var(--shadow-deep);
+  transition: transform 320ms var(--ease-out), border-color 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+}
+
+.viewport-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #0a0d11;
+}
+
+.video-card h3 {
+  padding: 0.9rem 1rem 1.05rem;
+  font-family: "Rajdhani", "Trebuchet MS", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: clamp(0.95rem, 1.8vw, 1.18rem);
+}
+
+.video-card:hover,
+.video-card:focus-within {
+  transform: translateY(-4px);
+  border-color: rgba(255, 122, 26, 0.58);
+  box-shadow: 0 22px 42px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 122, 26, 0.18);
+}
+
 .section--process {
   background:
     linear-gradient(180deg, #0b1014 0%, #111820 36%, #0d1218 100%),
@@ -1002,6 +1047,10 @@ main {
   .timeline {
     grid-template-columns: 2.7rem 1fr;
   }
+
+  .videos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 900px) {
@@ -1183,6 +1232,10 @@ main {
   }
 
   .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .videos-grid {
     grid-template-columns: 1fr;
   }
 

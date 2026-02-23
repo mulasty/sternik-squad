@@ -55,6 +55,7 @@
 
   const parallaxMedia = Array.from(document.querySelectorAll("[data-parallax]"));
   const tiltCards = Array.from(document.querySelectorAll("[data-tilt]"));
+  const viewportVideos = Array.from(document.querySelectorAll("[data-viewport-video]"));
 
   let heroPointerHandlers = null;
   const tiltHandlerMap = new WeakMap();
@@ -63,6 +64,7 @@
   setupReveals();
   setupNav();
   setupAnchors();
+  setupViewportVideos();
   refreshLayout();
   updateInteractiveModes();
 
@@ -178,6 +180,46 @@
           navLinks.classList.remove("is-open");
         }
       });
+    });
+  }
+
+  function setupViewportVideos() {
+    if (viewportVideos.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (!(video instanceof HTMLVideoElement)) {
+            return;
+          }
+
+          if (entry.isIntersecting) {
+            const playPromise = video.play();
+            if (playPromise && typeof playPromise.catch === "function") {
+              playPromise.catch(() => {
+                /* ignore autoplay errors */
+              });
+            }
+            return;
+          }
+
+          video.pause();
+          video.currentTime = 0;
+        });
+      },
+      {
+        threshold: 0.45,
+        rootMargin: "0px 0px -10% 0px"
+      }
+    );
+
+    viewportVideos.forEach((video) => {
+      video.muted = true;
+      video.defaultMuted = true;
+      observer.observe(video);
     });
   }
 
