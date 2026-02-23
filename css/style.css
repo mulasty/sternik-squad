@@ -184,6 +184,9 @@ main::before {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: "Poppins", "Tahoma", sans-serif;
   font-weight: 700;
   font-size: clamp(1.25rem, 2.4vw, 1.65rem);
@@ -191,6 +194,19 @@ main::before {
   text-transform: uppercase;
   color: #f7f9fb;
   text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.brand__logo {
+  display: block;
+  width: clamp(2.2rem, 4vw, 2.8rem);
+  height: auto;
+  color: #f7f9fb;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+  flex-shrink: 0;
+}
+
+.brand__name {
+  line-height: 1;
 }
 
 .nav-links {
@@ -1599,6 +1615,15 @@ main::before {
 
   .hero__scene {
     min-height: clamp(42rem, 122svh, 52rem);
+  }
+
+  .brand {
+    gap: 0.42rem;
+    letter-spacing: 0.04em;
+  }
+
+  .brand__logo {
+    width: 2rem;
   }
 
   .hero__layer--content {
