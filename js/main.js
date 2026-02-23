@@ -41,7 +41,6 @@
     media: document.querySelector('[data-depth-layer="media"]'),
     texture: document.querySelector('[data-depth-layer="texture"]'),
     content: document.querySelector('[data-depth-layer="content"]'),
-    feature: document.querySelector('[data-depth-layer="feature"]'),
     accents: document.querySelector('[data-depth-layer="accents"]')
   };
 
@@ -55,7 +54,9 @@
 
   const parallaxMedia = Array.from(document.querySelectorAll("[data-parallax]"));
   const tiltCards = Array.from(document.querySelectorAll("[data-tilt]"));
-  const viewportVideos = Array.from(document.querySelectorAll("[data-viewport-video]"));
+  const playlistContainer = document.querySelector("[data-video-playlist]");
+  const playlistVideo = document.querySelector("[data-playlist-video]");
+  const playlistItems = Array.from(document.querySelectorAll("[data-play-src]"));
 
   let heroPointerHandlers = null;
   const tiltHandlerMap = new WeakMap();
@@ -64,7 +65,7 @@
   setupReveals();
   setupNav();
   setupAnchors();
-  setupViewportVideos();
+  setupVideoPlaylist();
   refreshLayout();
   updateInteractiveModes();
 
@@ -183,21 +184,67 @@
     });
   }
 
-  function setupViewportVideos() {
-    if (viewportVideos.length === 0) {
+  function setupVideoPlaylist() {
+    if (!playlistContainer || !playlistVideo || playlistItems.length === 0) {
       return;
     }
+
+    const clips = playlistItems.map((item) => ({
+      src: item.dataset.playSrc || "",
+      poster: item.dataset.playPoster || "",
+      title: item.dataset.playTitle || ""
+    })).filter((clip) => clip.src.length > 0);
+
+    if (clips.length === 0) {
+      return;
+    }
+
+    let currentClipIndex = 0;
+
+    const setActiveItem = (index) => {
+      playlistItems.forEach((item, itemIndex) => {
+        item.classList.toggle("is-active", itemIndex === index);
+      });
+    };
+
+    const playCurrentClip = (autoplay = true) => {
+      const clip = clips[currentClipIndex];
+      playlistVideo.src = clip.src;
+      if (clip.poster) {
+        playlistVideo.poster = clip.poster;
+      }
+      if (clip.title) {
+        playlistVideo.setAttribute("aria-label", clip.title);
+      }
+      setActiveItem(currentClipIndex);
+
+      if (autoplay) {
+        const playPromise = playlistVideo.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {
+            /* ignore autoplay errors */
+          });
+        }
+      }
+    };
+
+    playlistVideo.muted = true;
+    playlistVideo.defaultMuted = true;
+    playlistVideo.loop = false;
+    playlistVideo.playsInline = true;
+
+    playCurrentClip(false);
+
+    playlistVideo.addEventListener("ended", () => {
+      currentClipIndex = (currentClipIndex + 1) % clips.length;
+      playCurrentClip(true);
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const video = entry.target;
-          if (!(video instanceof HTMLVideoElement)) {
-            return;
-          }
-
           if (entry.isIntersecting) {
-            const playPromise = video.play();
+            const playPromise = playlistVideo.play();
             if (playPromise && typeof playPromise.catch === "function") {
               playPromise.catch(() => {
                 /* ignore autoplay errors */
@@ -206,8 +253,7 @@
             return;
           }
 
-          video.pause();
-          video.currentTime = 0;
+          playlistVideo.pause();
         });
       },
       {
@@ -216,11 +262,7 @@
       }
     );
 
-    viewportVideos.forEach((video) => {
-      video.muted = true;
-      video.defaultMuted = true;
-      observer.observe(video);
-    });
+    observer.observe(playlistContainer);
   }
 
   function onScroll() {
@@ -407,11 +449,6 @@
       heroLayers.content.style.transform = `translate3d(0, ${(-scrollProgress * 16).toFixed(2)}px, 36px)`;
       heroLayers.content.style.opacity = String(1 - scrollProgress * 0.72);
 
-      if (heroLayers.feature) {
-        heroLayers.feature.style.transform = "translate3d(0, 0, 0) scale(1)";
-        heroLayers.feature.style.opacity = String(1 - scrollProgress * 0.25);
-      }
-
       heroLayers.accents.style.transform = "translate3d(0, 0, 0)";
       heroLayers.accents.style.opacity = "0";
       body.classList.toggle("is-after-hero", scrollProgress > 0.11);
@@ -422,11 +459,6 @@
     heroLayers.texture.style.transform = `translate3d(${(mouseX * 12).toFixed(2)}px, ${((mouseY * 8) - scrollProgress * 16).toFixed(2)}px, 20px) scale(1.05)`;
     heroLayers.content.style.transform = `translate3d(${(mouseX * 14).toFixed(2)}px, ${((mouseY * 10) - scrollProgress * 38).toFixed(2)}px, 80px)`;
     heroLayers.content.style.opacity = String(1 - scrollProgress * 1.05);
-
-    if (heroLayers.feature) {
-      heroLayers.feature.style.transform = `translate3d(${(mouseX * -8).toFixed(2)}px, ${((mouseY * 8) - scrollProgress * 26).toFixed(2)}px, 180px) scale(${(1 - scrollProgress * 0.07).toFixed(3)})`;
-      heroLayers.feature.style.opacity = String(1 - scrollProgress * 0.92);
-    }
 
     heroLayers.accents.style.transform = `translate3d(${(mouseX * 20).toFixed(2)}px, ${((mouseY * 16) - scrollProgress * 20).toFixed(2)}px, 160px)`;
     heroLayers.accents.style.opacity = String(1 - scrollProgress * 0.9);

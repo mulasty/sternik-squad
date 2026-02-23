@@ -91,16 +91,14 @@
         <div class="hero__layer hero__layer--content" data-depth-layer="content">
           <div class="hero__content">
             <div class="hero__copy">
-              <p class="eyebrow reveal">Sternik-Bud - Industrial Infrastructure</p>
+              <p class="eyebrow reveal">Sternik-Bud - Infrastruktura Przemysłowa</p>
               <h1 id="hero-title" class="split-text">Kompleksowa Budowa Hal i Obiektów Przemysłowych</h1>
               <p class="hero__lead reveal">Od pierwszego wykopu po finalny odbiór. Projektujemy i budujemy obiekty, które mają wytrzymać dekady intensywnej pracy.</p>
-              <a class="btn btn--primary reveal" href="#realizacje">Zobacz realizacje</a>
+              <div class="hero__actions reveal">
+                <a class="btn btn--primary" href="#realizacje">Zobacz realizacje</a>
+                <a class="btn btn--secondary" href="#uslugi">Usługi</a>
+              </div>
             </div>
-
-            <figure class="hero__feature" data-depth-layer="feature">
-              <img src="assets/33.jpeg" loading="eager" alt="Front realizacji przemysłowej Sternik-Bud">
-              <figcaption>Generalny wykonawca inwestycji przemysłowych</figcaption>
-            </figure>
           </div>
         </div>
 
@@ -115,7 +113,7 @@
 
       <a class="scroll-indicator" href="#uslugi" aria-label="Przewiń do sekcji usług">
         <span class="scroll-indicator__mouse"></span>
-        <span class="scroll-indicator__text">Scroll</span>
+        <span class="scroll-indicator__text">Przewiń</span>
       </a>
     </section>
 
@@ -236,32 +234,26 @@
     <section id="filmy" class="section section--videos" aria-labelledby="filmy-title">
       <div class="section__intro reveal">
         <p class="section__kicker">Filmy z realizacji</p>
-        <h2 id="filmy-title" class="split-text">3 klipy z placu budowy</h2>
-        <p class="section__seo-copy">Każdy film uruchamia się automatycznie po wejściu w viewport, jest odtwarzany w pętli i bez dźwięku.</p>
+        <h2 id="filmy-title" class="split-text">1 odtwarzacz, 3 filmy w sekwencji</h2>
+        <p class="section__seo-copy">Filmy odtwarzają się jeden po drugim (1, 2, 3), a następnie wracają do początku i lecą w pętli bez dźwięku po wejściu sekcji w obszar widoku.</p>
       </div>
 
-      <div class="videos-grid">
-        <article class="video-card reveal">
-          <video class="viewport-video" data-viewport-video muted loop playsinline preload="none" poster="assets/11.jpeg" aria-label="Film z realizacji hali przemysłowej">
-            <source src="assets/111.mp4" type="video/mp4">
-          </video>
-          <h3>Budowa hali przemysłowej</h3>
-        </article>
-
-        <article class="video-card reveal">
-          <video class="viewport-video" data-viewport-video muted loop playsinline preload="none" poster="assets/31.jpeg" aria-label="Film z prac ziemnych i montażowych">
-            <source src="assets/2.mp4" type="video/mp4">
-          </video>
-          <h3>Roboty ziemne i montaż</h3>
-        </article>
-
-        <article class="video-card reveal">
-          <video class="viewport-video" data-viewport-video muted loop playsinline preload="none" poster="assets/33.jpeg" aria-label="Film z finalizacji inwestycji">
-            <source src="assets/WhatsApp%20Video%202026-02-23%20at%2007.01.29.mp4" type="video/mp4">
-          </video>
-          <h3>Finalizacja inwestycji</h3>
-        </article>
+      <div class="video-playlist reveal" data-video-playlist>
+        <video class="playlist-video" data-playlist-video muted playsinline preload="metadata" poster="assets/11.jpeg" aria-label="Sekwencja filmów z realizacji Sternik-Bud"></video>
       </div>
+
+      <ul class="playlist-track" aria-label="Lista filmów w sekwencji">
+        <li class="playlist-item is-active" data-play-src="assets/111.mp4" data-play-poster="assets/11.jpeg" data-play-title="Budowa hali przemysłowej">
+          <span>01</span> Budowa hali przemysłowej
+        </li>
+        <li class="playlist-item" data-play-src="assets/2.mp4" data-play-poster="assets/31.jpeg" data-play-title="Roboty ziemne i montaż">
+          <span>02</span> Roboty ziemne i montaż
+        </li>
+        <li class="playlist-item" data-play-src="assets/WhatsApp%20Video%202026-02-23%20at%2007.01.29.mp4" data-play-poster="assets/33.jpeg" data-play-title="Finalizacja inwestycji">
+          <span>03</span> Finalizacja inwestycji
+        </li>
+      </ul>
+      <p class="videos-note">Odtwarzanie startuje po wejściu sekcji w obszar widoku.</p>
     </section>
 
     <section id="proces" class="section section--process" aria-labelledby="proces-title">
@@ -316,7 +308,7 @@
 
   <footer class="site-footer">
     <p>&copy; 2026 Sternik-Bud. Budownictwo przemysłowe i infrastrukturalne.</p>
-    <p><a href="https://sternik-squad.vercel.app" target="_blank" rel="noopener noreferrer">Najnowsza wersja online</a></p>
+    <p><a href="https://sternik-squad.vercel.app" target="_blank" rel="noopener noreferrer">Najnowsza wersja strony</a></p>
   </footer>
 
   <script src="js/main.js" defer></script>
