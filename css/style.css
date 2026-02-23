@@ -186,6 +186,18 @@ main {
   overflow: hidden;
 }
 
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(5rem, 11vw, 9rem);
+  background: linear-gradient(to bottom, rgba(8, 11, 15, 0), rgba(8, 11, 15, 0.94));
+  z-index: 2;
+  pointer-events: none;
+}
+
 .hero__scene {
   position: absolute;
   inset: 0;
@@ -200,15 +212,15 @@ main {
   will-change: transform;
 }
 
-.hero__layer--video {
+.hero__layer--media {
   transform: translate3d(0, 0, -120px) scale(1.22);
 }
 
-.hero__video {
+.hero__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.72) contrast(1.05) brightness(0.75);
+  filter: saturate(0.8) contrast(1.02) brightness(0.7);
 }
 
 .hero__layer--overlay {
@@ -235,11 +247,21 @@ main {
   align-items: center;
   padding-inline: clamp(1rem, 5vw, 4.5rem);
   transform: translateZ(80px);
+  z-index: 4;
 }
 
 .hero__content {
-  width: min(92%, 880px);
+  width: min(95%, 1240px);
   margin-top: clamp(3.5rem, 8vh, 5.8rem);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 35%);
+  gap: clamp(1.2rem, 3vw, 2.4rem);
+  align-items: end;
+}
+
+.hero__copy {
+  max-width: 860px;
 }
 
 .eyebrow,
@@ -273,6 +295,43 @@ main {
 
 .hero .btn {
   margin-top: 2rem;
+}
+
+.hero__feature {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 28px 52px rgba(0, 0, 0, 0.52), 0 0 34px rgba(255, 122, 26, 0.2);
+  transform: translateZ(180px);
+}
+
+.hero__feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(7, 10, 14, 0.84), rgba(7, 10, 14, 0) 48%);
+  z-index: 1;
+}
+
+.hero__feature img {
+  width: 100%;
+  height: clamp(18rem, 52vh, 30rem);
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.04) brightness(0.82);
+}
+
+.hero__feature figcaption {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  font-family: "Rajdhani", "Trebuchet MS", sans-serif;
+  font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #f5f8fb;
 }
 
 .hero__layer--accents {
@@ -442,6 +501,14 @@ main {
   background:
     linear-gradient(180deg, rgba(8, 11, 15, 0.35), rgba(15, 20, 26, 0.78) 22%, rgba(10, 14, 18, 0.98)),
     radial-gradient(circle at 80% 12%, rgba(255, 122, 26, 0.14), transparent 38%);
+  transition: transform 750ms var(--ease-out), opacity 700ms var(--ease-out), filter 700ms var(--ease-out);
+}
+
+.js body:not(.is-after-hero) .section--services {
+  opacity: 0.12;
+  transform: translate3d(0, 6.2rem, 0) scale(0.975);
+  filter: blur(5px);
+  pointer-events: none;
 }
 
 .services-grid {
@@ -578,7 +645,7 @@ main {
   z-index: -2;
 }
 
-.gallery-bg__video {
+.gallery-bg__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -957,11 +1024,23 @@ main {
   }
 
   .hero__content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
     text-align: center;
+  }
+
+  .hero__copy {
+    max-width: 920px;
   }
 
   .hero__lead {
     margin-inline: auto;
+  }
+
+  .hero__feature {
+    width: min(92vw, 560px);
+    margin-inline: auto;
+    text-align: left;
   }
 
   .gallery-viewport {
@@ -1003,7 +1082,7 @@ main {
     padding-inline: 0.9rem;
   }
 
-  .hero__layer--video {
+  .hero__layer--media {
     transform: translate3d(0, 0, -70px) scale(1.15);
   }
 

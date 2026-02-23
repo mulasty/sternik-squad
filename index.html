@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="video" href="assets/111.mp4" type="video/mp4">
+  <link rel="preload" as="image" href="assets/14.jpeg">
   <link rel="stylesheet" href="css/style.css">
 
   <script type="application/ld+json">
@@ -77,10 +77,8 @@
   <main>
     <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="hero__scene" data-hero-scene>
-        <div class="hero__layer hero__layer--video" data-depth-layer="video">
-          <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="assets/11.jpeg">
-            <source src="assets/111.mp4" type="video/mp4">
-          </video>
+        <div class="hero__layer hero__layer--media" data-depth-layer="media">
+          <img class="hero__image" src="assets/14.jpeg" loading="eager" fetchpriority="high" alt="Budowa hali przemyslowej Sternik Squad">
         </div>
 
         <div class="hero__layer hero__layer--overlay" data-depth-layer="overlay"></div>
@@ -88,10 +86,17 @@
 
         <div class="hero__layer hero__layer--content" data-depth-layer="content">
           <div class="hero__content">
-            <p class="eyebrow reveal">Sternik Squad - Industrial Infrastructure</p>
-            <h1 id="hero-title" class="split-text">Kompleksowa Budowa Hal i Obiektow Przemyslowych</h1>
-            <p class="hero__lead reveal">Od pierwszego wykopu po finalny odbior. Projektujemy i budujemy obiekty, ktore maja wytrzymac dekady intensywnej pracy.</p>
-            <a class="btn btn--primary reveal" href="#realizacje">Zobacz realizacje</a>
+            <div class="hero__copy">
+              <p class="eyebrow reveal">Sternik Squad - Industrial Infrastructure</p>
+              <h1 id="hero-title" class="split-text">Kompleksowa Budowa Hal i Obiektow Przemyslowych</h1>
+              <p class="hero__lead reveal">Od pierwszego wykopu po finalny odbior. Projektujemy i budujemy obiekty, ktore maja wytrzymac dekady intensywnej pracy.</p>
+              <a class="btn btn--primary reveal" href="#realizacje">Zobacz realizacje</a>
+            </div>
+
+            <figure class="hero__feature" data-depth-layer="feature">
+              <img src="assets/33.jpeg" loading="eager" alt="Front realizacji przemyslowej Sternik Squad">
+              <figcaption>Generalny wykonawca inwestycji przemyslowych</figcaption>
+            </figure>
           </div>
         </div>
 
@@ -166,9 +171,7 @@
 
     <section id="realizacje" class="section gallery-section" aria-labelledby="realizacje-title">
       <div class="gallery-bg" aria-hidden="true">
-        <video class="gallery-bg__video" autoplay muted loop playsinline preload="none" poster="assets/31.jpeg">
-          <source src="assets/2.mp4" type="video/mp4">
-        </video>
+        <img class="gallery-bg__image" src="assets/31.jpeg" loading="lazy" alt="">
       </div>
 
       <div class="gallery-sticky">
