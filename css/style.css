@@ -200,7 +200,7 @@ main::before {
   display: block;
   width: clamp(2.2rem, 4vw, 2.8rem);
   height: auto;
-  filter: brightness(0) invert(1) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
   flex-shrink: 0;
 }
 
@@ -274,7 +274,7 @@ main::before {
   display: block;
   width: 1.7rem;
   height: auto;
-  filter: brightness(0) invert(1);
+  filter: none;
 }
 
 .nav-toggle__line {
