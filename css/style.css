@@ -443,6 +443,14 @@ main {
   color: #f0f4f8;
 }
 
+.section__seo-copy {
+  margin-top: 1rem;
+  max-width: 78ch;
+  color: #cfd8e2;
+  font-size: clamp(0.96rem, 1.3vw, 1.08rem);
+  line-height: 1.7;
+}
+
 .section h2 {
   font-family: "Rajdhani", "Trebuchet MS", sans-serif;
   font-size: clamp(1.8rem, 4.8vw, 3.6rem);
@@ -901,6 +909,18 @@ main {
   background: #0a0d11;
 }
 
+.site-footer a {
+  color: #e8eef4;
+  text-decoration: underline;
+  text-underline-offset: 0.18rem;
+  transition: color 220ms var(--ease-out);
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: #ffb075;
+}
+
 .js .reveal {
   opacity: 0;
   transform: translate3d(0, 2rem, 0) scale(0.97);
@@ -1019,28 +1039,70 @@ main {
     pointer-events: auto;
   }
 
+  .hero {
+    min-height: auto;
+  }
+
+  .hero__scene {
+    position: relative;
+    min-height: clamp(46rem, 125svh, 56rem);
+  }
+
   .hero__layer--content {
     justify-items: center;
+    align-items: start;
+    padding-top: clamp(5rem, 12svh, 6.5rem);
+    padding-bottom: clamp(6rem, 15svh, 8rem);
   }
 
   .hero__content {
+    width: min(100%, 42rem);
     grid-template-columns: 1fr;
-    gap: 1rem;
-    text-align: center;
+    gap: 1.1rem;
+    text-align: left;
+    align-items: start;
+    margin-top: 0;
   }
 
   .hero__copy {
-    max-width: 920px;
+    max-width: none;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 10.5vw, 3.4rem);
   }
 
   .hero__lead {
-    margin-inline: auto;
+    margin-inline: 0;
+    width: 100%;
+  }
+
+  .hero .btn {
+    width: auto;
+    min-width: 13.5rem;
   }
 
   .hero__feature {
-    width: min(92vw, 560px);
-    margin-inline: auto;
+    width: min(100%, 26rem);
+    margin-inline: 0;
     text-align: left;
+    transform: none;
+  }
+
+  .hero__feature img {
+    height: clamp(12rem, 36vh, 16.5rem);
+  }
+
+  .hero__feature figcaption {
+    font-size: clamp(0.78rem, 2.4vw, 1rem);
+  }
+
+  .hero__layer--accents {
+    display: none;
+  }
+
+  .scroll-indicator {
+    display: none;
   }
 
   .gallery-viewport {
@@ -1082,13 +1144,42 @@ main {
     padding-inline: 0.9rem;
   }
 
+  .hero__scene {
+    min-height: clamp(42rem, 122svh, 52rem);
+  }
+
+  .hero__layer--content {
+    padding-top: clamp(4.8rem, 10.5svh, 5.8rem);
+    padding-bottom: clamp(4.2rem, 12svh, 6rem);
+  }
+
+  .hero__content {
+    width: min(100%, 33rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(1.75rem, 10.5vw, 2.45rem);
+  }
+
+  .hero__lead {
+    font-size: clamp(0.95rem, 4.2vw, 1.05rem);
+  }
+
   .hero__layer--media {
-    transform: translate3d(0, 0, -70px) scale(1.15);
+    transform: translate3d(0, 0, -40px) scale(1.08);
+  }
+
+  .hero__feature img {
+    height: clamp(10.5rem, 30vh, 13.5rem);
+  }
+
+  .hero__feature figcaption {
+    font-size: 0.78rem;
   }
 
   .hero__layer--texture,
   .hero__layer--accents {
-    opacity: 0.65;
+    opacity: 0.45;
   }
 
   .services-grid {

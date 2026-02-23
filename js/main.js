@@ -357,6 +357,24 @@
 
     const mouseX = state.heroMouse.x;
     const mouseY = state.heroMouse.y;
+    const isMobileHero = window.innerWidth <= 900;
+
+    if (isMobileHero) {
+      heroLayers.media.style.transform = `translate3d(0, ${(scrollProgress * 10).toFixed(2)}px, -40px) scale(1.08)`;
+      heroLayers.texture.style.transform = `translate3d(0, ${(-scrollProgress * 6).toFixed(2)}px, 14px) scale(1.03)`;
+      heroLayers.content.style.transform = `translate3d(0, ${(-scrollProgress * 16).toFixed(2)}px, 36px)`;
+      heroLayers.content.style.opacity = String(1 - scrollProgress * 0.72);
+
+      if (heroLayers.feature) {
+        heroLayers.feature.style.transform = "translate3d(0, 0, 0) scale(1)";
+        heroLayers.feature.style.opacity = String(1 - scrollProgress * 0.25);
+      }
+
+      heroLayers.accents.style.transform = "translate3d(0, 0, 0)";
+      heroLayers.accents.style.opacity = "0";
+      body.classList.toggle("is-after-hero", scrollProgress > 0.11);
+      return;
+    }
 
     heroLayers.media.style.transform = `translate3d(${(mouseX * -24).toFixed(2)}px, ${((mouseY * -10) + scrollProgress * 24).toFixed(2)}px, -120px) scale(1.22)`;
     heroLayers.texture.style.transform = `translate3d(${(mouseX * 12).toFixed(2)}px, ${((mouseY * 8) - scrollProgress * 16).toFixed(2)}px, 20px) scale(1.05)`;
