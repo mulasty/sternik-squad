@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 90" role="img" aria-label="Logo Sternik-Bud">
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke-width="4" d="M20 72V33L58 10L100 24L124 42V72"/>
+    <path stroke-width="4" d="M20 33L62 47L100 24"/>
+    <path stroke-width="4" d="M58 10L98 25"/>
+    <path stroke-width="3.2" d="M40 72V43M58 72V47M76 72V54M94 72V50M110 72V58"/>
+    <path stroke-width="3.2" d="M58 47L94 50M62 56L98 58M64 64L101 66"/>
+    <path stroke-width="3.2" d="M25 72H14M42 72H34M60 72H52M78 72H70M96 72H88M114 72H130"/>
+    <path stroke-width="3.2" d="M70 58L76 66M76 58L70 66"/>
+  </g>
+</svg>
