@@ -54,6 +54,7 @@
 
   const parallaxMedia = Array.from(document.querySelectorAll("[data-parallax]"));
   const tiltCards = Array.from(document.querySelectorAll("[data-tilt]"));
+  const motionSections = Array.from(document.querySelectorAll("main .section"));
   const playlistContainer = document.querySelector("[data-video-playlist]");
   const playlistVideo = document.querySelector("[data-playlist-video]");
   const playlistItems = Array.from(document.querySelectorAll("[data-play-src]"));
@@ -63,6 +64,7 @@
 
   splitText(document.querySelectorAll(".split-text"));
   setupReveals();
+  setupSectionMotion();
   setupNav();
   setupAnchors();
   setupVideoPlaylist();
@@ -174,7 +176,9 @@
         }
 
         event.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        const headerOffset = header ? header.offsetHeight + 10 : 0;
+        const targetY = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+        smoothScrollTo(targetY);
 
         if (navToggle && navLinks) {
           navToggle.setAttribute("aria-expanded", "false");
@@ -182,6 +186,80 @@
         }
       });
     });
+  }
+
+  function setupSectionMotion() {
+    if (motionSections.length === 0) {
+      return;
+    }
+
+    const targets = motionSections.filter((section) => !section.classList.contains("gallery-section"));
+
+    if (state.reduceMotion) {
+      targets.forEach((section) => {
+        section.classList.add("section-motion", "is-visible");
+      });
+      return;
+    }
+
+    targets.forEach((section) => section.classList.add("section-motion"));
+
+    const sectionObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.16,
+        rootMargin: "0px 0px -12% 0px"
+      }
+    );
+
+    targets.forEach((section) => sectionObserver.observe(section));
+  }
+
+  function smoothScrollTo(targetY) {
+    const destination = clamp(targetY, 0, Math.max(0, root.scrollHeight - window.innerHeight));
+
+    if (state.reduceMotion) {
+      window.scrollTo(0, destination);
+      return;
+    }
+
+    const start = window.scrollY;
+    const distance = destination - start;
+    if (Math.abs(distance) < 2) {
+      window.scrollTo(0, destination);
+      return;
+    }
+
+    const duration = clamp(Math.abs(distance) * 0.5, 420, 920);
+    let startTime = 0;
+
+    const step = (timestamp) => {
+      if (!startTime) {
+        startTime = timestamp;
+      }
+
+      const elapsed = timestamp - startTime;
+      const progress = clamp(elapsed / duration, 0, 1);
+      const eased = easeInOutCubic(progress);
+      const nextY = start + distance * eased;
+
+      window.scrollTo(0, nextY);
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
   }
 
   function setupVideoPlaylist() {
@@ -444,9 +522,9 @@
     const isMobileHero = window.innerWidth <= 900;
 
     if (isMobileHero) {
-      heroLayers.media.style.transform = `translate3d(0, ${(scrollProgress * 10).toFixed(2)}px, -40px) scale(1.08)`;
-      heroLayers.texture.style.transform = `translate3d(0, ${(-scrollProgress * 6).toFixed(2)}px, 14px) scale(1.03)`;
-      heroLayers.content.style.transform = `translate3d(0, ${(-scrollProgress * 16).toFixed(2)}px, 36px)`;
+      heroLayers.media.style.transform = `translate3d(0, ${(scrollProgress * 8).toFixed(2)}px, -40px) scale(1.08)`;
+      heroLayers.texture.style.transform = `translate3d(0, ${(-scrollProgress * 4).toFixed(2)}px, 14px) scale(1.03)`;
+      heroLayers.content.style.transform = `translate3d(0, ${(-scrollProgress * 12).toFixed(2)}px, 36px)`;
       heroLayers.content.style.opacity = String(1 - scrollProgress * 0.72);
 
       heroLayers.accents.style.transform = "translate3d(0, 0, 0)";
@@ -455,12 +533,12 @@
       return;
     }
 
-    heroLayers.media.style.transform = `translate3d(${(mouseX * -24).toFixed(2)}px, ${((mouseY * -10) + scrollProgress * 24).toFixed(2)}px, -120px) scale(1.22)`;
-    heroLayers.texture.style.transform = `translate3d(${(mouseX * 12).toFixed(2)}px, ${((mouseY * 8) - scrollProgress * 16).toFixed(2)}px, 20px) scale(1.05)`;
-    heroLayers.content.style.transform = `translate3d(${(mouseX * 14).toFixed(2)}px, ${((mouseY * 10) - scrollProgress * 38).toFixed(2)}px, 80px)`;
+    heroLayers.media.style.transform = `translate3d(${(mouseX * -16).toFixed(2)}px, ${((mouseY * -6) + scrollProgress * 16).toFixed(2)}px, -120px) scale(1.22)`;
+    heroLayers.texture.style.transform = `translate3d(${(mouseX * 8).toFixed(2)}px, ${((mouseY * 6) - scrollProgress * 10).toFixed(2)}px, 20px) scale(1.05)`;
+    heroLayers.content.style.transform = `translate3d(${(mouseX * 10).toFixed(2)}px, ${((mouseY * 8) - scrollProgress * 26).toFixed(2)}px, 80px)`;
     heroLayers.content.style.opacity = String(1 - scrollProgress * 1.05);
 
-    heroLayers.accents.style.transform = `translate3d(${(mouseX * 20).toFixed(2)}px, ${((mouseY * 16) - scrollProgress * 20).toFixed(2)}px, 160px)`;
+    heroLayers.accents.style.transform = `translate3d(${(mouseX * 14).toFixed(2)}px, ${((mouseY * 12) - scrollProgress * 14).toFixed(2)}px, 160px)`;
     heroLayers.accents.style.opacity = String(1 - scrollProgress * 0.9);
 
     body.classList.toggle("is-after-hero", scrollProgress > 0.11);
