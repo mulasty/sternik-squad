@@ -110,13 +110,28 @@
 
       const text = element.textContent.trim();
       const fragment = document.createDocumentFragment();
+      const tokens = text.split(/(\s+)/).filter((token) => token.length > 0);
+      let charIndex = 0;
 
-      Array.from(text).forEach((char, index) => {
-        const span = document.createElement("span");
-        span.className = char === " " ? "char space" : "char";
-        span.style.setProperty("--char-index", String(index));
-        span.textContent = char === " " ? "\u00A0" : char;
-        fragment.appendChild(span);
+      tokens.forEach((token) => {
+        if (/^\s+$/.test(token)) {
+          fragment.appendChild(document.createTextNode(" "));
+          return;
+        }
+
+        const word = document.createElement("span");
+        word.className = "word";
+
+        Array.from(token).forEach((char) => {
+          const span = document.createElement("span");
+          span.className = "char";
+          span.style.setProperty("--char-index", String(charIndex));
+          span.textContent = char;
+          word.appendChild(span);
+          charIndex += 1;
+        });
+
+        fragment.appendChild(word);
       });
 
       element.textContent = "";

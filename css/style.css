@@ -109,6 +109,17 @@ button {
   white-space: normal;
 }
 
+h1,
+h2,
+h3,
+.split-text {
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
+  white-space: normal;
+  line-height: 1.1;
+}
+
 p,
 li {
   text-wrap: pretty;
@@ -442,8 +453,8 @@ main::before {
 .hero h1 {
   font-family: "Poppins", "Inter", sans-serif;
   font-size: clamp(2rem, 7.1vw, 5.25rem);
-  line-height: 0.95;
-  max-width: 16ch;
+  line-height: 1.05;
+  max-width: 13.5ch;
   text-transform: uppercase;
   text-wrap: balance;
   text-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
@@ -695,10 +706,10 @@ main::before {
 .section h2 {
   font-family: "Poppins", "Inter", sans-serif;
   font-size: clamp(1.8rem, 4.8vw, 3.6rem);
-  line-height: 1;
+  line-height: 1.08;
   text-transform: uppercase;
   text-wrap: balance;
-  max-width: 18ch;
+  max-width: 14ch;
 }
 
 .section--why {
@@ -769,8 +780,9 @@ main::before {
   transition-delay: calc(var(--char-index) * 20ms);
 }
 
-.split-text .char.space {
-  width: 0.35em;
+.split-text .word {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .split-text.is-visible .char {
@@ -1887,6 +1899,7 @@ body.legal-page {
 
   .hero h1 {
     font-size: clamp(2rem, 10.5vw, 3.4rem);
+    line-height: 1.08;
   }
 
   .hero__lead {
@@ -1972,6 +1985,20 @@ body.legal-page {
   }
 }
 
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: clamp(1.85rem, 8vw, 3rem);
+    line-height: 1.1;
+    max-width: 13ch;
+  }
+
+  .section h2 {
+    font-size: clamp(1.55rem, 7vw, 2.6rem);
+    line-height: 1.12;
+    max-width: 14ch;
+  }
+}
+
 @media (max-width: 640px) {
   .section {
     padding-inline: 0.9rem;
@@ -2005,6 +2032,7 @@ body.legal-page {
 
   .hero h1 {
     font-size: clamp(1.75rem, 10.5vw, 2.45rem);
+    line-height: 1.12;
   }
 
   .hero__lead {
@@ -2082,7 +2110,7 @@ body.legal-page {
   }
 
   .section h2 {
-    max-width: 15ch;
+    max-width: 14ch;
   }
 
   .section__seo-copy {
