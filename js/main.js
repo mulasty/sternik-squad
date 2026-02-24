@@ -35,6 +35,22 @@
   const progressBar = document.querySelector(".scroll-progress__bar");
   const navToggle = document.querySelector(".nav-toggle");
   const navLinks = document.getElementById("nav-links");
+  const navAnchors = Array.from(document.querySelectorAll(".nav-links a[href^='#']"));
+  const navSectionTargets = navAnchors
+    .map((anchor) => {
+      const selector = anchor.getAttribute("href");
+      if (!selector || selector.length < 2) {
+        return null;
+      }
+
+      const section = document.querySelector(selector);
+      if (!section) {
+        return null;
+      }
+
+      return { anchor, selector, section };
+    })
+    .filter(Boolean);
 
   const hero = document.getElementById("hero");
   const heroLayers = {
@@ -58,6 +74,10 @@
   const playlistContainer = document.querySelector("[data-video-playlist]");
   const playlistVideo = document.querySelector("[data-playlist-video]");
   const playlistItems = Array.from(document.querySelectorAll("[data-play-src]"));
+  const leadForm = document.querySelector("[data-lead-form]");
+  const leadStatus = document.querySelector("[data-lead-status]");
+
+  let rafId = 0;
 
   let heroPointerHandlers = null;
   const tiltHandlerMap = new WeakMap();
@@ -68,6 +88,7 @@
   setupNav();
   setupAnchors();
   setupVideoPlaylist();
+  setupLeadForm();
   refreshLayout();
   updateInteractiveModes();
 
@@ -77,9 +98,9 @@
   window.addEventListener("load", () => {
     refreshLayout();
     state.targetY = window.scrollY || 0;
+    requestTick();
   });
-
-  requestAnimationFrame(animationLoop);
+  requestTick();
 
   function splitText(elements) {
     elements.forEach((element) => {
@@ -310,6 +331,7 @@
     playlistVideo.defaultMuted = true;
     playlistVideo.loop = false;
     playlistVideo.playsInline = true;
+    playlistVideo.preload = "none";
 
     playCurrentClip(false);
 
@@ -322,6 +344,10 @@
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            if (playlistVideo.readyState < 2) {
+              playlistVideo.load();
+            }
+
             const playPromise = playlistVideo.play();
             if (playPromise && typeof playPromise.catch === "function") {
               playPromise.catch(() => {
@@ -343,13 +369,148 @@
     observer.observe(playlistContainer);
   }
 
+  function setupLeadForm() {
+    if (!leadForm || !leadStatus) {
+      return;
+    }
+
+    const submitButton = leadForm.querySelector('button[type="submit"]');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const requiredFields = ["name", "email", "projectType", "message", "rodoConsent"];
+
+    const setStatus = (message, type = "") => {
+      leadStatus.textContent = message;
+      leadStatus.classList.toggle("is-error", type === "error");
+      leadStatus.classList.toggle("is-success", type === "success");
+    };
+
+    const setFieldValidity = (name, isValid) => {
+      const field = leadForm.elements.namedItem(name);
+      if (!field) {
+        return;
+      }
+
+      if (field instanceof RadioNodeList) {
+        return;
+      }
+
+      field.classList.toggle("is-invalid", !isValid);
+      field.setAttribute("aria-invalid", String(!isValid));
+    };
+
+    const handleFieldInteraction = (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement) || !("name" in target)) {
+        return;
+      }
+
+      const fieldName = target.name;
+      if (!fieldName) {
+        return;
+      }
+
+      if (fieldName === "rodoConsent") {
+        setFieldValidity(fieldName, leadForm.elements.namedItem(fieldName)?.checked === true);
+        return;
+      }
+
+      const hasValue = typeof target.value === "string" ? target.value.trim().length > 0 : false;
+      setFieldValidity(fieldName, hasValue);
+    };
+
+    leadForm.addEventListener("input", handleFieldInteraction);
+    leadForm.addEventListener("change", handleFieldInteraction);
+
+    leadForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(leadForm);
+      const payload = {
+        name: String(formData.get("name") || "").trim(),
+        email: String(formData.get("email") || "").trim(),
+        phone: String(formData.get("phone") || "").trim(),
+        projectType: String(formData.get("projectType") || "").trim(),
+        area: String(formData.get("area") || "").trim(),
+        message: String(formData.get("message") || "").trim(),
+        rodoConsent: formData.get("rodoConsent") === "on"
+      };
+
+      const invalid = [];
+      requiredFields.forEach((fieldName) => {
+        const value = payload[fieldName];
+        if (fieldName === "rodoConsent") {
+          if (value !== true) {
+            invalid.push(fieldName);
+          }
+          return;
+        }
+
+        if (!value) {
+          invalid.push(fieldName);
+        }
+      });
+
+      if (payload.email && !emailPattern.test(payload.email)) {
+        invalid.push("email");
+      }
+
+      const uniqueInvalid = Array.from(new Set(invalid));
+      requiredFields.forEach((fieldName) => setFieldValidity(fieldName, !uniqueInvalid.includes(fieldName)));
+
+      if (uniqueInvalid.length > 0) {
+        setStatus("Uzupełnij wymagane pola i zaakceptuj zgodę RODO.", "error");
+        return;
+      }
+
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+      }
+      setStatus("Wysyłamy zapytanie...");
+
+      try {
+        const response = await fetch("/api/lead", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error("request_failed");
+        }
+
+        leadForm.reset();
+        requiredFields.forEach((fieldName) => setFieldValidity(fieldName, true));
+        setStatus("Dziękujemy. Zapytanie zostało wysłane, wracamy z odpowiedzią do 24h.", "success");
+      } catch (_error) {
+        setStatus("Wysyłka nie powiodła się. Użyj adresu kontakt@sternik-bud.pl.", "error");
+      } finally {
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+        }
+      }
+    });
+  }
+
   function onScroll() {
     state.targetY = window.scrollY || 0;
+    state.docH = Math.max(root.scrollHeight, document.body.scrollHeight);
+    requestTick();
   }
 
   function onResize() {
     refreshLayout();
     updateInteractiveModes();
+    requestTick();
+  }
+
+  function requestTick() {
+    if (rafId) {
+      return;
+    }
+
+    rafId = requestAnimationFrame(animationLoop);
   }
 
   function refreshLayout() {
@@ -408,11 +569,13 @@
 
         state.heroMouse.x = clamp(normalizedX, -1, 1);
         state.heroMouse.y = clamp(normalizedY, -1, 1);
+        requestTick();
       };
 
       const onPointerLeave = () => {
         state.heroMouse.x = 0;
         state.heroMouse.y = 0;
+        requestTick();
       };
 
       hero.addEventListener("pointermove", onPointerMove);
@@ -473,6 +636,8 @@
   }
 
   function animationLoop() {
+    rafId = 0;
+
     const delta = state.targetY - state.currentY;
     state.currentY += delta * state.ease;
 
@@ -481,13 +646,16 @@
     }
 
     updateHeader();
+    updateNavActive();
     updateScrollProgress();
     updateHeroDepth();
     updateGalleryMotion();
     updateTimelineProgress();
     updateParallaxMedia();
 
-    requestAnimationFrame(animationLoop);
+    if (Math.abs(state.targetY - state.currentY) > 0.08) {
+      requestTick();
+    }
   }
 
   function updateHeader() {
@@ -496,6 +664,27 @@
     }
 
     header.classList.toggle("is-scrolled", state.currentY > 20);
+  }
+
+  function updateNavActive() {
+    if (navSectionTargets.length === 0) {
+      return;
+    }
+
+    const offset = (header ? header.offsetHeight : 0) + 110;
+    const currentPoint = state.currentY + offset;
+    let activeId = "";
+
+    navSectionTargets.forEach((target) => {
+      const sectionTop = target.section.offsetTop;
+      if (sectionTop <= currentPoint) {
+        activeId = target.selector;
+      }
+    });
+
+    navSectionTargets.forEach((target) => {
+      target.anchor.classList.toggle("is-active", target.selector === activeId);
+    });
   }
 
   function updateScrollProgress() {
@@ -521,11 +710,21 @@
     const mouseY = state.heroMouse.y;
     const isMobileHero = window.innerWidth <= 900;
 
+    if (state.reduceMotion) {
+      body.classList.toggle("is-after-hero", scrollProgress > 0.11);
+      heroLayers.media.style.transform = isMobileHero ? "translate3d(0, 0, -40px) scale(1.08)" : "translate3d(0, 0, -120px) scale(1.22)";
+      heroLayers.texture.style.transform = isMobileHero ? "translate3d(0, 0, 14px) scale(1.03)" : "translate3d(0, 0, 20px) scale(1.05)";
+      heroLayers.content.style.transform = isMobileHero ? "translate3d(0, 0, 36px)" : "translate3d(0, 0, 80px)";
+      heroLayers.content.style.opacity = "1";
+      heroLayers.accents.style.opacity = "0";
+      return;
+    }
+
     if (isMobileHero) {
-      heroLayers.media.style.transform = `translate3d(0, ${(scrollProgress * 8).toFixed(2)}px, -40px) scale(1.08)`;
-      heroLayers.texture.style.transform = `translate3d(0, ${(-scrollProgress * 4).toFixed(2)}px, 14px) scale(1.03)`;
-      heroLayers.content.style.transform = `translate3d(0, ${(-scrollProgress * 12).toFixed(2)}px, 36px)`;
-      heroLayers.content.style.opacity = String(1 - scrollProgress * 0.72);
+      heroLayers.media.style.transform = `translate3d(0, ${(scrollProgress * 5).toFixed(2)}px, -40px) scale(1.08)`;
+      heroLayers.texture.style.transform = `translate3d(0, ${(-scrollProgress * 2.5).toFixed(2)}px, 14px) scale(1.03)`;
+      heroLayers.content.style.transform = `translate3d(0, ${(-scrollProgress * 9).toFixed(2)}px, 36px)`;
+      heroLayers.content.style.opacity = String(1 - scrollProgress * 0.64);
 
       heroLayers.accents.style.transform = "translate3d(0, 0, 0)";
       heroLayers.accents.style.opacity = "0";
@@ -588,6 +787,8 @@
       return;
     }
 
+    const intensity = window.innerWidth <= 900 ? 0.52 : 1;
+
     parallaxMedia.forEach((media) => {
       const rect = media.getBoundingClientRect();
       if (rect.bottom < -120 || rect.top > state.viewportH + 120) {
@@ -596,7 +797,7 @@
 
       const speed = Number(media.dataset.parallax || "0.1");
       const distanceFromCenter = rect.top - state.viewportH * 0.5;
-      const translateY = -distanceFromCenter * speed * 0.18;
+      const translateY = -distanceFromCenter * speed * 0.18 * intensity;
 
       media.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0) scale(1.03)`;
     });

@@ -15,37 +15,59 @@
   <meta property="og:url" content="https://sternik-squad.vercel.app/">
   <meta property="og:title" content="Sternik-Bud | Budowa Hal Przemysłowych, Obór i Konstrukcji Stalowych">
   <meta property="og:description" content="Kompleksowa realizacja inwestycji: hale przemysłowe, obory, roboty ziemne, żelbety, fundamenty i konstrukcje stalowe.">
-  <meta property="og:image" content="https://sternik-squad.vercel.app/assets/14.jpeg">
-  <meta property="og:image:secure_url" content="https://sternik-squad.vercel.app/assets/14.jpeg">
+  <meta property="og:image" content="https://sternik-squad.vercel.app/assets/optimized/14-1600.jpg">
+  <meta property="og:image:secure_url" content="https://sternik-squad.vercel.app/assets/optimized/14-1600.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:alt" content="Sternik-Bud - budowa hal i obiektów przemysłowych">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Sternik-Bud | Budowa Hal Przemysłowych, Obór i Konstrukcji Stalowych">
   <meta name="twitter:description" content="Kompleksowa budowa hal przemysłowych i obór: wykopy, żelbety, fundamenty oraz montaż konstrukcji stalowych.">
-  <meta name="twitter:image" content="https://sternik-squad.vercel.app/assets/14.jpeg">
+  <meta name="twitter:image" content="https://sternik-squad.vercel.app/assets/optimized/14-1600.jpg">
   <meta name="twitter:image:alt" content="Sternik-Bud - budowa hal i obiektów przemysłowych">
   <meta name="theme-color" content="#111315">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/14.jpeg">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
+  <link rel="preload" as="image" href="assets/optimized/14-1280.jpg" imagesrcset="assets/optimized/14-640.jpg 640w, assets/optimized/14-960.jpg 960w, assets/optimized/14-1280.jpg 1280w, assets/optimized/14-1600.jpg 1600w" imagesizes="100vw">
   <link rel="stylesheet" href="css/style.css">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Sternik-Bud",
+    "name": "STERNIK Jarosław Sternik",
+    "alternateName": "Sternik-Bud",
     "description": "Kompleksowa budowa hal przemysłowych i obór, wykopy i roboty ziemne, żelbety i fundamenty oraz montaż konstrukcji stalowych.",
     "url": "https://sternik-squad.vercel.app/",
-    "image": "https://sternik-squad.vercel.app/assets/14.jpeg",
-    "telephone": "+48-000-000-000",
+    "image": "https://sternik-squad.vercel.app/assets/optimized/14-1600.jpg",
+    "email": "kontakt@sternik-bud.pl",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Juliusza Słowackiego 11",
+      "postalCode": "18-210",
+      "addressLocality": "Szepietowo",
       "addressCountry": "PL"
     },
-    "areaServed": "Polska",
+    "taxID": "7221568211",
+    "identifier": [
+      {
+        "@type": "PropertyValue",
+        "name": "NIP",
+        "value": "7221568211"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "REGON",
+        "value": "200160743"
+      }
+    ],
+    "areaServed": {
+      "@type": "Country",
+      "name": "Polska"
+    },
     "serviceType": [
       "Kompleksowa budowa hal przemysłowych",
       "Budowa obór",
@@ -64,12 +86,18 @@
   <header class="site-header" id="site-header">
     <nav class="main-nav" aria-label="Nawigacja główna">
       <a href="#hero" class="brand" aria-label="Sternik-Bud - strona główna">
-        <img class="brand__logo" src="assets/logo-sternik.png" width="44" height="28" alt="" aria-hidden="true">
+        <picture class="brand__logo-wrap" aria-hidden="true">
+          <source srcset="assets/logo-sternik.svg" type="image/svg+xml">
+          <img class="brand__logo" src="assets/logo-sternik.png" width="44" height="28" alt="">
+        </picture>
         <span class="brand__name">Sternik-Bud</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Otwórz menu">
         <span class="nav-toggle__logo" aria-hidden="true">
-          <img src="assets/logo-sternik.png" width="26" height="16" alt="">
+          <picture>
+            <source srcset="assets/logo-sternik.svg" type="image/svg+xml">
+            <img src="assets/logo-sternik.png" width="26" height="16" alt="">
+          </picture>
         </span>
         <span class="nav-toggle__line nav-toggle__line--top"></span>
         <span class="nav-toggle__line nav-toggle__line--bottom"></span>
@@ -88,7 +116,11 @@
     <section id="hero" class="hero bg-grid-dark" aria-labelledby="hero-title">
       <div class="hero__scene" data-hero-scene>
         <div class="hero__layer hero__layer--media" data-depth-layer="media">
-          <img class="hero__image" src="assets/14.jpeg" loading="eager" fetchpriority="high" alt="Budowa hali przemysłowej Sternik-Bud">
+          <picture>
+            <source type="image/avif" srcset="assets/optimized/14-640.avif 640w, assets/optimized/14-960.avif 960w, assets/optimized/14-1280.avif 1280w, assets/optimized/14-1600.avif 1600w" sizes="100vw">
+            <source type="image/webp" srcset="assets/optimized/14-640.webp 640w, assets/optimized/14-960.webp 960w, assets/optimized/14-1280.webp 1280w, assets/optimized/14-1600.webp 1600w" sizes="100vw">
+            <img class="hero__image" src="assets/optimized/14-1280.jpg" srcset="assets/optimized/14-640.jpg 640w, assets/optimized/14-960.jpg 960w, assets/optimized/14-1280.jpg 1280w, assets/optimized/14-1600.jpg 1600w" sizes="100vw" loading="eager" fetchpriority="high" alt="Budowa hali przemysłowej Sternik-Bud">
+          </picture>
         </div>
 
         <div class="hero__layer hero__layer--overlay" data-depth-layer="overlay"></div>
@@ -214,7 +246,11 @@
 
       <div class="services-grid">
         <article class="service-card reveal" data-tilt>
-          <img class="service-card__media" src="assets/14.jpeg" loading="lazy" alt="Nowoczesna hala przemysłowa w trakcie realizacji">
+          <picture>
+            <source type="image/avif" srcset="assets/optimized/14-640.avif 640w, assets/optimized/14-960.avif 960w, assets/optimized/14-1280.avif 1280w, assets/optimized/14-1600.avif 1600w" sizes="(max-width: 1024px) 100vw, 33vw">
+            <source type="image/webp" srcset="assets/optimized/14-640.webp 640w, assets/optimized/14-960.webp 960w, assets/optimized/14-1280.webp 1280w, assets/optimized/14-1600.webp 1600w" sizes="(max-width: 1024px) 100vw, 33vw">
+            <img class="service-card__media" src="assets/optimized/14-960.jpg" srcset="assets/optimized/14-640.jpg 640w, assets/optimized/14-960.jpg 960w, assets/optimized/14-1280.jpg 1280w, assets/optimized/14-1600.jpg 1600w" sizes="(max-width: 1024px) 100vw, 33vw" loading="lazy" alt="Nowoczesna hala przemysłowa w trakcie realizacji">
+          </picture>
           <div class="service-card__overlay"></div>
           <div class="service-card__content">
             <h3>Kompleksowa budowa hal przemysłowych</h3>
@@ -223,7 +259,11 @@
         </article>
 
         <article class="service-card reveal" data-tilt>
-          <img class="service-card__media" src="assets/15.jpeg" loading="lazy" alt="Budowa obory z elementami konstrukcji stalowej">
+          <picture>
+            <source type="image/avif" srcset="assets/optimized/15-640.avif 640w, assets/optimized/15-960.avif 960w, assets/optimized/15-1280.avif 1280w, assets/optimized/15-1600.avif 1600w" sizes="(max-width: 1024px) 100vw, 33vw">
+            <source type="image/webp" srcset="assets/optimized/15-640.webp 640w, assets/optimized/15-960.webp 960w, assets/optimized/15-1280.webp 1280w, assets/optimized/15-1600.webp 1600w" sizes="(max-width: 1024px) 100vw, 33vw">
+            <img class="service-card__media" src="assets/optimized/15-960.jpg" srcset="assets/optimized/15-640.jpg 640w, assets/optimized/15-960.jpg 960w, assets/optimized/15-1280.jpg 1280w, assets/optimized/15-1600.jpg 1600w" sizes="(max-width: 1024px) 100vw, 33vw" loading="lazy" alt="Budowa obory z elementami konstrukcji stalowej">
+          </picture>
           <div class="service-card__overlay"></div>
           <div class="service-card__content">
             <h3>Budowa obór</h3>
@@ -232,7 +272,11 @@
         </article>
 
         <article class="service-card reveal" data-tilt>
-          <img class="service-card__media" src="assets/16.jpeg" loading="lazy" alt="Roboty ziemne wykonywane ciężkim sprzętem budowlanym">
+          <picture>
+            <source type="image/avif" srcset="assets/optimized/16-640.avif 640w, assets/optimized/16-960.avif 960w, assets/optimized/16-1280.avif 1280w, assets/optimized/16-1600.avif 1600w" sizes="(max-width: 1024px) 100vw, 33vw">
+            <source type="image/webp" srcset="assets/optimized/16-640.webp 640w, assets/optimized/16-960.webp 960w, assets/optimized/16-1280.webp 1280w, assets/optimized/16-1600.webp 1600w" sizes="(max-width: 1024px) 100vw, 33vw">
+            <img class="service-card__media" src="assets/optimized/16-960.jpg" srcset="assets/optimized/16-640.jpg 640w, assets/optimized/16-960.jpg 960w, assets/optimized/16-1280.jpg 1280w, assets/optimized/16-1600.jpg 1600w" sizes="(max-width: 1024px) 100vw, 33vw" loading="lazy" alt="Roboty ziemne wykonywane ciężkim sprzętem budowlanym">
+          </picture>
           <div class="service-card__overlay"></div>
           <div class="service-card__content">
             <h3>Wykopy i roboty ziemne</h3>
@@ -241,7 +285,11 @@
         </article>
 
         <article class="service-card reveal" data-tilt>
-          <img class="service-card__media" src="assets/20.jpeg" loading="lazy" alt="Wykonywanie żelbetowych fundamentów pod obiekty przemysłowe">
+          <picture>
+            <source type="image/avif" srcset="assets/optimized/20-640.avif 640w, assets/optimized/20-960.avif 960w, assets/optimized/20-1280.avif 1280w, assets/optimized/20-1600.avif 1600w" sizes="(max-width: 1024px) 100vw, 50vw">
+            <source type="image/webp" srcset="assets/optimized/20-640.webp 640w, assets/optimized/20-960.webp 960w, assets/optimized/20-1280.webp 1280w, assets/optimized/20-1600.webp 1600w" sizes="(max-width: 1024px) 100vw, 50vw">
+            <img class="service-card__media" src="assets/optimized/20-960.jpg" srcset="assets/optimized/20-640.jpg 640w, assets/optimized/20-960.jpg 960w, assets/optimized/20-1280.jpg 1280w, assets/optimized/20-1600.jpg 1600w" sizes="(max-width: 1024px) 100vw, 50vw" loading="lazy" alt="Wykonywanie żelbetowych fundamentów pod obiekty przemysłowe">
+          </picture>
           <div class="service-card__overlay"></div>
           <div class="service-card__content">
             <h3>Żelbety i fundamenty</h3>
@@ -250,7 +298,11 @@
         </article>
 
         <article class="service-card reveal" data-tilt>
-          <img class="service-card__media" src="assets/22.jpeg" loading="lazy" alt="Montaż konstrukcji stalowych na placu budowy">
+          <picture>
+            <source type="image/avif" srcset="assets/optimized/22-640.avif 640w, assets/optimized/22-960.avif 960w, assets/optimized/22-1280.avif 1280w, assets/optimized/22-1600.avif 1600w" sizes="(max-width: 1024px) 100vw, 50vw">
+            <source type="image/webp" srcset="assets/optimized/22-640.webp 640w, assets/optimized/22-960.webp 960w, assets/optimized/22-1280.webp 1280w, assets/optimized/22-1600.webp 1600w" sizes="(max-width: 1024px) 100vw, 50vw">
+            <img class="service-card__media" src="assets/optimized/22-960.jpg" srcset="assets/optimized/22-640.jpg 640w, assets/optimized/22-960.jpg 960w, assets/optimized/22-1280.jpg 1280w, assets/optimized/22-1600.jpg 1600w" sizes="(max-width: 1024px) 100vw, 50vw" loading="lazy" alt="Montaż konstrukcji stalowych na placu budowy">
+          </picture>
           <div class="service-card__overlay"></div>
           <div class="service-card__content">
             <h3>Montaż konstrukcji stalowych</h3>
@@ -262,7 +314,12 @@
 
     <section id="realizacje" class="section gallery-section" aria-labelledby="realizacje-title">
       <div class="gallery-bg" aria-hidden="true">
-        <img class="gallery-bg__image" src="assets/31.jpeg" loading="lazy" alt="">
+        <picture>
+          <source type="image/avif" srcset="assets/optimized/31-640.avif 640w, assets/optimized/31-960.avif 960w, assets/optimized/31-1280.avif 1280w, assets/optimized/31-1600.avif 1600w" sizes="100vw">
+
+          <source type="image/webp" srcset="assets/optimized/31-640.webp 640w, assets/optimized/31-960.webp 960w, assets/optimized/31-1280.webp 1280w, assets/optimized/31-1600.webp 1600w" sizes="100vw">
+          <img class="gallery-bg__image" src="assets/optimized/31-1280.jpg" srcset="assets/optimized/31-640.jpg 640w, assets/optimized/31-960.jpg 960w, assets/optimized/31-1280.jpg 1280w, assets/optimized/31-1600.jpg 1600w" sizes="100vw" loading="lazy" alt="">
+        </picture>
       </div>
 
       <div class="gallery-sticky">
@@ -275,7 +332,11 @@
           <div class="gallery-track" data-gallery-track>
             <article class="gallery-item reveal" data-depth="-56">
               <figure class="gallery-item__media" data-parallax="0.14">
-                <img src="assets/18.jpeg" loading="lazy" alt="Konstrukcja stalowa hali przemysłowej na etapie montażu">
+                <picture>
+                  <source type="image/avif" srcset="assets/optimized/18-640.avif 640w, assets/optimized/18-960.avif 960w, assets/optimized/18-1280.avif 1280w, assets/optimized/18-1600.avif 1600w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <source type="image/webp" srcset="assets/optimized/18-640.webp 640w, assets/optimized/18-960.webp 960w, assets/optimized/18-1280.webp 1280w, assets/optimized/18-1600.webp 1600w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <img src="assets/optimized/18-960.jpg" srcset="assets/optimized/18-640.jpg 640w, assets/optimized/18-960.jpg 960w, assets/optimized/18-1280.jpg 1280w, assets/optimized/18-1600.jpg 1600w" sizes="(max-width: 900px) 78vw, 30vw" loading="lazy" alt="Konstrukcja stalowa hali przemysłowej na etapie montażu">
+                </picture>
               </figure>
               <div class="gallery-item__info">
                 <div class="gallery-item__caption">Hale przemysłowe</div>
@@ -289,7 +350,11 @@
 
             <article class="gallery-item reveal" data-depth="-30">
               <figure class="gallery-item__media" data-parallax="0.1">
-                <img src="assets/19.jpeg" loading="lazy" alt="Roboty ziemne i przygotowanie terenu inwestycji">
+                <picture>
+                  <source type="image/avif" srcset="assets/optimized/19-640.avif 640w, assets/optimized/19-960.avif 960w, assets/optimized/19-1280.avif 1280w, assets/optimized/19-1600.avif 1600w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <source type="image/webp" srcset="assets/optimized/19-640.webp 640w, assets/optimized/19-960.webp 960w, assets/optimized/19-1280.webp 1280w, assets/optimized/19-1600.webp 1600w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <img src="assets/optimized/19-960.jpg" srcset="assets/optimized/19-640.jpg 640w, assets/optimized/19-960.jpg 960w, assets/optimized/19-1280.jpg 1280w, assets/optimized/19-1600.jpg 1600w" sizes="(max-width: 900px) 78vw, 30vw" loading="lazy" alt="Roboty ziemne i przygotowanie terenu inwestycji">
+                </picture>
               </figure>
               <div class="gallery-item__info">
                 <div class="gallery-item__caption">Roboty ziemne</div>
@@ -303,7 +368,11 @@
 
             <article class="gallery-item reveal" data-depth="-70">
               <figure class="gallery-item__media" data-parallax="0.15">
-                <img src="assets/21.jpeg" loading="lazy" alt="Żelbetowe fundamenty pod inwestycję przemysłową">
+                <picture>
+                  <source type="image/avif" srcset="assets/optimized/21-640.avif 640w, assets/optimized/21-960.avif 960w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <source type="image/webp" srcset="assets/optimized/21-640.webp 640w, assets/optimized/21-960.webp 960w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <img src="assets/optimized/21-960.jpg" srcset="assets/optimized/21-640.jpg 640w, assets/optimized/21-960.jpg 960w" sizes="(max-width: 900px) 78vw, 30vw" loading="lazy" alt="Żelbetowe fundamenty pod inwestycję przemysłową">
+                </picture>
               </figure>
               <div class="gallery-item__info">
                 <div class="gallery-item__caption">Fundamenty</div>
@@ -317,7 +386,11 @@
 
             <article class="gallery-item reveal" data-depth="-38">
               <figure class="gallery-item__media" data-parallax="0.11">
-                <img src="assets/23.jpeg" loading="lazy" alt="Zaawansowany montaż stalowej konstrukcji obiektu">
+                <picture>
+                  <source type="image/avif" srcset="assets/optimized/23-640.avif 640w, assets/optimized/23-960.avif 960w, assets/optimized/23-1280.avif 1280w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <source type="image/webp" srcset="assets/optimized/23-640.webp 640w, assets/optimized/23-960.webp 960w, assets/optimized/23-1280.webp 1280w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <img src="assets/optimized/23-960.jpg" srcset="assets/optimized/23-640.jpg 640w, assets/optimized/23-960.jpg 960w, assets/optimized/23-1280.jpg 1280w" sizes="(max-width: 900px) 78vw, 30vw" loading="lazy" alt="Zaawansowany montaż stalowej konstrukcji obiektu">
+                </picture>
               </figure>
               <div class="gallery-item__info">
                 <div class="gallery-item__caption">Konstrukcje stalowe</div>
@@ -331,7 +404,11 @@
 
             <article class="gallery-item reveal" data-depth="-62">
               <figure class="gallery-item__media" data-parallax="0.13">
-                <img src="assets/26.jpeg" loading="lazy" alt="Budowa obiektu inwentarskiego o wysokiej trwałości">
+                <picture>
+                  <source type="image/avif" srcset="assets/optimized/26-640.avif 640w, assets/optimized/26-960.avif 960w, assets/optimized/26-1280.avif 1280w, assets/optimized/26-1600.avif 1600w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <source type="image/webp" srcset="assets/optimized/26-640.webp 640w, assets/optimized/26-960.webp 960w, assets/optimized/26-1280.webp 1280w, assets/optimized/26-1600.webp 1600w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <img src="assets/optimized/26-960.jpg" srcset="assets/optimized/26-640.jpg 640w, assets/optimized/26-960.jpg 960w, assets/optimized/26-1280.jpg 1280w, assets/optimized/26-1600.jpg 1600w" sizes="(max-width: 900px) 78vw, 30vw" loading="lazy" alt="Budowa obiektu inwentarskiego o wysokiej trwałości">
+                </picture>
               </figure>
               <div class="gallery-item__info">
                 <div class="gallery-item__caption">Budowa obór</div>
@@ -345,7 +422,11 @@
 
             <article class="gallery-item reveal" data-depth="-34">
               <figure class="gallery-item__media" data-parallax="0.12">
-                <img src="assets/27.jpeg" loading="lazy" alt="Faza finalna inwestycji przemysłowej przed odbiorem">
+                <picture>
+                  <source type="image/avif" srcset="assets/optimized/27-640.avif 640w, assets/optimized/27-960.avif 960w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <source type="image/webp" srcset="assets/optimized/27-640.webp 640w, assets/optimized/27-960.webp 960w" sizes="(max-width: 900px) 78vw, 30vw">
+                  <img src="assets/optimized/27-960.jpg" srcset="assets/optimized/27-640.jpg 640w, assets/optimized/27-960.jpg 960w" sizes="(max-width: 900px) 78vw, 30vw" loading="lazy" alt="Faza finalna inwestycji przemysłowej przed odbiorem">
+                </picture>
               </figure>
               <div class="gallery-item__info">
                 <div class="gallery-item__caption">Odbiór inwestycji</div>
@@ -369,14 +450,14 @@
       </div>
 
       <div class="video-playlist reveal" data-video-playlist>
-        <video class="playlist-video" data-playlist-video muted playsinline preload="metadata" poster="assets/11.jpeg" aria-label="Sekwencja filmów z realizacji Sternik-Bud"></video>
+        <video class="playlist-video" data-playlist-video muted playsinline preload="none" poster="assets/optimized/11-960.jpg" aria-label="Sekwencja filmów z realizacji Sternik-Bud"></video>
       </div>
 
       <ul class="playlist-track" aria-label="Lista filmów w sekwencji">
-        <li class="playlist-item is-active" data-play-src="assets/111.mp4" data-play-poster="assets/11.jpeg" data-play-title="Budowa hali przemysłowej">
+        <li class="playlist-item is-active" data-play-src="assets/111.mp4" data-play-poster="assets/optimized/11-960.jpg" data-play-title="Budowa hali przemysłowej">
           <span>01</span> Budowa hali przemysłowej
         </li>
-        <li class="playlist-item" data-play-src="assets/2.mp4" data-play-poster="assets/31.jpeg" data-play-title="Roboty ziemne i montaż">
+        <li class="playlist-item" data-play-src="assets/2.mp4" data-play-poster="assets/optimized/31-960.jpg" data-play-title="Roboty ziemne i montaż">
           <span>02</span> Roboty ziemne i montaż
         </li>
         <li class="playlist-item" data-play-src="assets/WhatsApp%20Video%202026-02-23%20at%2007.01.29.mp4" data-play-poster="assets/33.jpeg" data-play-title="Finalizacja inwestycji">
@@ -427,22 +508,153 @@
 
     <section id="kontakt" class="section section--cta bg-grid-dark" aria-labelledby="kontakt-title">
       <div class="cta-texture" aria-hidden="true"></div>
-      <div class="cta__content reveal">
-        <p class="section__kicker">Gotowi do startu</p>
-        <h2 id="kontakt-title" class="split-text">Umów bezpłatną analizę inwestycji</h2>
-        <p class="cta-trust">Odpowiadamy w ciągu 24h</p>
-        <ul class="cta-benefits" aria-label="Korzyści współpracy">
-          <li>szybka wycena</li>
-          <li>konsultacja techniczna</li>
-          <li>kompleksowe podejście</li>
-        </ul>
-        <a class="btn btn--glow" href="mailto:kontakt@sternik-bud.pl">Umów konsultację</a>
+      <div class="cta__content">
+        <div class="cta__intro reveal">
+          <p class="section__kicker">Gotowi do startu</p>
+          <h2 id="kontakt-title" class="split-text">Umów bezpłatną analizę inwestycji</h2>
+          <p class="cta-trust">Odpowiadamy w ciągu 24h</p>
+          <ul class="cta-benefits" aria-label="Korzyści współpracy">
+            <li>szybka wycena</li>
+            <li>konsultacja techniczna</li>
+            <li>kompleksowe podejście</li>
+          </ul>
+        </div>
+
+        <div class="cta__layout">
+          <div class="cta__panel reveal">
+            <h3>Skontaktuj się z zespołem STERNIK Jarosław Sternik</h3>
+            <p>Wypełnij formularz, a przygotujemy wstępny zakres i harmonogram realizacji inwestycji.</p>
+            <a class="btn btn--ghost" href="#realizacje">Zobacz realizacje</a>
+          </div>
+
+          <form class="lead-form reveal" data-lead-form novalidate>
+            <div class="lead-form__row">
+              <label for="lead-name">Imię i nazwisko</label>
+              <input id="lead-name" name="name" type="text" autocomplete="name" required>
+            </div>
+
+            <div class="lead-form__grid">
+              <div class="lead-form__row">
+                <label for="lead-email">E-mail</label>
+                <input id="lead-email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="lead-form__row">
+                <label for="lead-phone">Telefon (opcjonalnie)</label>
+                <input id="lead-phone" name="phone" type="tel" autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="lead-form__grid">
+              <div class="lead-form__row">
+                <label for="lead-project-type">Typ inwestycji</label>
+                <select id="lead-project-type" name="projectType" required>
+                  <option value="">Wybierz typ inwestycji</option>
+                  <option value="Hala przemysłowa">Hala przemysłowa</option>
+                  <option value="Obora">Obora</option>
+                  <option value="Konstrukcja stalowa">Konstrukcja stalowa</option>
+                  <option value="Roboty ziemne i fundamenty">Roboty ziemne i fundamenty</option>
+                  <option value="Inne">Inne</option>
+                </select>
+              </div>
+              <div class="lead-form__row">
+                <label for="lead-area">Orientacyjna powierzchnia</label>
+                <input id="lead-area" name="area" type="text" placeholder="np. 3500 m²">
+              </div>
+            </div>
+
+            <div class="lead-form__row">
+              <label for="lead-message">Wiadomość</label>
+              <textarea id="lead-message" name="message" rows="4" required></textarea>
+            </div>
+
+            <label class="lead-form__consent" for="lead-rodo-consent">
+              <input id="lead-rodo-consent" name="rodoConsent" type="checkbox" required>
+              <span>Wyrażam zgodę na przetwarzanie danych osobowych zgodnie z <a href="rodo.html">RODO</a> i <a href="polityka-prywatnosci.html">Polityką prywatności</a>.</span>
+            </label>
+
+            <div class="lead-form__actions">
+              <button class="btn btn--glow" type="submit">Wyceń swoją halę - odpowiadamy w 24h</button>
+              <a class="lead-form__mailto" href="mailto:kontakt@sternik-bud.pl">Lub wyślij zapytanie bezpośrednio: kontakt@sternik-bud.pl</a>
+            </div>
+
+            <p class="lead-form__status" data-lead-status aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="dane-kontaktowe" class="section section--company-data bg-grid-dark" aria-labelledby="dane-kontaktowe-title">
+      <div class="section__intro section__intro--light reveal">
+        <p class="section__kicker">Transparentność i dane firmy</p>
+        <h2 id="dane-kontaktowe-title" class="split-text">Dane kontaktowe</h2>
+      </div>
+
+      <div class="company-data-grid">
+        <article class="company-data-card reveal" aria-labelledby="dane-kontaktowe-kolumna">
+          <h3 id="dane-kontaktowe-kolumna">
+            <span class="company-data-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 21C15.8 16.8 19 13.6 19 10A7 7 0 1 0 5 10C5 13.6 8.2 16.8 12 21Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.7"/>
+              </svg>
+            </span>
+            Dane kontaktowe
+          </h3>
+          <p>Juliusza Słowackiego 11<br>18-210 Szepietowo</p>
+          <p>NIP: 7221568211<br>REGON: 200160743</p>
+          <p>E-mail: <a href="mailto:kontakt@sternik-bud.pl">kontakt@sternik-bud.pl</a></p>
+        </article>
+
+        <article class="company-data-card reveal" aria-labelledby="dane-firmowe-kolumna">
+          <h3 id="dane-firmowe-kolumna">
+            <span class="company-data-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 21H21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M6 21V7L12 4L18 7V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <path d="M10 11H14M10 15H14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </span>
+            Dane firmowe
+          </h3>
+          <p>
+            Nazwa pełna:<br>
+            "STERNIK" Jarosław Sternik
+          </p>
+          <p>
+            Adres rejestrowy:<br>
+            Juliusza Słowackiego 11<br>
+            18-210 Szepietowo
+          </p>
+          <p>
+            NIP:<br>
+            7221568211
+          </p>
+          <p>
+            REGON:<br>
+            200160743
+          </p>
+          <p class="company-data-card__doc">
+            <span class="company-data-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 3H13L18 8V21H7V3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <path d="M13 3V8H18" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <path d="M10 12H15M10 16H15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </span>
+            Dane rejestrowe aktualne na dzień publikacji strony.
+          </p>
+        </article>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Sternik-Bud. Budownictwo przemysłowe i infrastrukturalne.</p>
+    <p>&copy; 2026 STERNIK Jarosław Sternik. Budownictwo przemysłowe i infrastrukturalne.</p>
+    <p>
+      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+      <span aria-hidden="true"> | </span>
+      <a href="rodo.html">RODO</a>
+    </p>
     <p><a href="https://sternik-squad.vercel.app" target="_blank" rel="noopener noreferrer">Najnowsza wersja strony</a></p>
   </footer>
 
