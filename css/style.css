@@ -924,9 +924,9 @@ main::before {
   content: "";
   position: absolute;
   inset: -40%;
-  background: conic-gradient(from 80deg, transparent 0deg, rgba(47, 107, 201, 0.65) 140deg, transparent 260deg);
+  background: conic-gradient(from 80deg, transparent 0deg, rgba(255, 255, 255, 0.16) 140deg, transparent 260deg);
   opacity: 0;
-  filter: blur(26px);
+  filter: blur(18px);
   transform: rotate(12deg);
   transition: opacity 380ms var(--ease-out);
   pointer-events: none;
@@ -953,8 +953,7 @@ main::before {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(168deg, rgba(10, 14, 20, 0.18), rgba(10, 14, 20, 0.7) 54%),
-    linear-gradient(to top, rgba(31, 79, 163, 0.22) 0%, transparent 52%);
+    linear-gradient(170deg, rgba(8, 12, 18, 0.26), rgba(8, 12, 18, 0.78) 56%);
 }
 
 .service-card__content {
@@ -971,20 +970,22 @@ main::before {
   font-size: clamp(1.2rem, 2vw, 1.8rem);
   line-height: 1.02;
   text-transform: uppercase;
-  color: var(--brand-blue-dark);
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .service-card p {
   margin-top: 0.7rem;
   font-size: clamp(0.9rem, 0.24vw + 0.84rem, 0.98rem);
-  color: #2d3645;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .service-card:hover,
 .service-card:focus-within {
   --lift: -0.48rem;
-  border-color: rgba(47, 107, 201, 0.45);
-  box-shadow: 0 26px 46px rgba(0, 0, 0, 0.42), 0 0 40px rgba(47, 107, 201, 0.16);
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.38);
 }
 
 .service-card:hover::before,
@@ -1146,65 +1147,70 @@ main::before {
 
 .section--videos {
   background:
-    linear-gradient(180deg, #0b1014 0%, #111a27 46%, #0e141b 100%),
-    radial-gradient(circle at 16% 24%, rgba(47, 107, 201, 0.16), transparent 42%);
+    linear-gradient(180deg, #0a1119 0%, #0f1a2b 48%, #0b131f 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: auto, 120px 120px, 120px 120px;
 }
 
-.video-playlist {
-  width: min(100%, 1120px);
-  margin-inline: auto;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: #0f151d;
-  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.52);
-}
-
-.playlist-video {
-  width: 100%;
-  aspect-ratio: 16 / 8.5;
-  object-fit: cover;
-  background: #0a0d11;
-}
-
-.playlist-track {
-  width: min(100%, 1120px);
-  margin: 1rem auto 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
-}
-
-.playlist-item {
-  border-radius: 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(12, 18, 24, 0.68);
-  padding: 0.8rem 0.95rem;
-  font-family: "Poppins", "Inter", sans-serif;
+.video-showcase__label {
+  width: min(100%, var(--max-width));
+  margin: 0 auto 1rem;
+  font-size: clamp(0.7rem, 0.18vw + 0.66rem, 0.82rem);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: clamp(0.86rem, 0.24vw + 0.8rem, 1.02rem);
-  color: #d8e1ea;
-  transition: border-color 280ms var(--ease-out), color 280ms var(--ease-out), background-color 280ms var(--ease-out);
+  color: #c7d7f3;
 }
 
-.playlist-item span {
-  color: var(--brand-blue-light);
-  margin-right: 0.4rem;
+.video-showcase {
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.6vw, 1.2rem);
 }
 
-.playlist-item.is-active {
-  border-color: rgba(47, 107, 201, 0.7);
-  background: rgba(47, 107, 201, 0.14);
-  color: #f6f9ff;
+.video-showcase__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  background: #0d131d;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.46);
+  transition: transform 260ms var(--ease-out), box-shadow 260ms var(--ease-out), border-color 260ms var(--ease-out);
+  will-change: transform;
 }
 
-.videos-note {
-  width: min(100%, 1120px);
-  margin: 0.8rem auto 0;
-  color: var(--text-muted);
-  font-size: clamp(0.88rem, 0.22vw + 0.82rem, 0.96rem);
+.video-showcase__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(6, 10, 16, 0.08), rgba(6, 10, 16, 0.42));
+}
+
+.video-showcase__video {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: #090d14;
+  filter: saturate(0.88) brightness(0.82);
+  transform: scale(1);
+  transition: transform 260ms var(--ease-out), filter 260ms var(--ease-out);
+  will-change: transform;
+}
+
+.video-showcase__item:hover,
+.video-showcase__item:focus-within {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 28px 52px rgba(0, 0, 0, 0.52);
+}
+
+.video-showcase__item:hover .video-showcase__video,
+.video-showcase__item:focus-within .video-showcase__video {
+  transform: scale(1.02);
+  filter: saturate(0.96) brightness(0.92);
 }
 
 .section--process {
@@ -1711,7 +1717,7 @@ body.legal-page {
 
 .js .reveal .service-card__media,
 .js .reveal .gallery-item img,
-.js .reveal .playlist-video {
+.js .reveal .video-showcase__video {
   opacity: 0;
   transition: transform 880ms var(--ease-out), opacity 680ms var(--ease-out), filter 780ms var(--ease-out);
   will-change: transform, opacity;
@@ -1725,7 +1731,7 @@ body.legal-page {
   transform: scale(1.12) translate3d(0, 0.65rem, 0);
 }
 
-.js .reveal .playlist-video {
+.js .reveal .video-showcase__video {
   transform: scale(1.03) translate3d(0, 0.45rem, 0);
 }
 
@@ -1739,7 +1745,7 @@ body.legal-page {
   transform: scale(1.06) translate3d(0, 0, 0);
 }
 
-.js .reveal.is-visible .playlist-video {
+.js .reveal.is-visible .video-showcase__video {
   opacity: 1;
   transform: scale(1) translate3d(0, 0, 0);
 }
@@ -1931,6 +1937,10 @@ body.legal-page {
     grid-template-columns: 1fr;
   }
 
+  .video-showcase {
+    grid-template-columns: 1fr;
+  }
+
   .hero__layer--accents {
     display: none;
   }
@@ -2061,9 +2071,8 @@ body.legal-page {
     grid-template-columns: 1fr;
   }
 
-  .playlist-track {
-    grid-template-columns: 1fr;
-    gap: 0.55rem;
+  .video-showcase {
+    gap: 0.75rem;
   }
 
   .service-card {

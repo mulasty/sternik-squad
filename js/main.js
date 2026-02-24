@@ -71,9 +71,6 @@
   const parallaxMedia = Array.from(document.querySelectorAll("[data-parallax]"));
   const tiltCards = Array.from(document.querySelectorAll("[data-tilt]"));
   const motionSections = Array.from(document.querySelectorAll("main .section"));
-  const playlistContainer = document.querySelector("[data-video-playlist]");
-  const playlistVideo = document.querySelector("[data-playlist-video]");
-  const playlistItems = Array.from(document.querySelectorAll("[data-play-src]"));
   const leadForm = document.querySelector("[data-lead-form]");
   const leadStatus = document.querySelector("[data-lead-status]");
 
@@ -87,7 +84,6 @@
   setupSectionMotion();
   setupNav();
   setupAnchors();
-  setupVideoPlaylist();
   setupLeadForm();
   refreshLayout();
   updateInteractiveModes();
@@ -296,92 +292,6 @@
     };
 
     window.requestAnimationFrame(step);
-  }
-
-  function setupVideoPlaylist() {
-    if (!playlistContainer || !playlistVideo || playlistItems.length === 0) {
-      return;
-    }
-
-    const clips = playlistItems.map((item) => ({
-      src: item.dataset.playSrc || "",
-      poster: item.dataset.playPoster || "",
-      title: item.dataset.playTitle || ""
-    })).filter((clip) => clip.src.length > 0);
-
-    if (clips.length === 0) {
-      return;
-    }
-
-    let currentClipIndex = 0;
-
-    const setActiveItem = (index) => {
-      playlistItems.forEach((item, itemIndex) => {
-        item.classList.toggle("is-active", itemIndex === index);
-      });
-    };
-
-    const playCurrentClip = (autoplay = true) => {
-      const clip = clips[currentClipIndex];
-      playlistVideo.src = clip.src;
-      if (clip.poster) {
-        playlistVideo.poster = clip.poster;
-      }
-      if (clip.title) {
-        playlistVideo.setAttribute("aria-label", clip.title);
-      }
-      setActiveItem(currentClipIndex);
-
-      if (autoplay) {
-        const playPromise = playlistVideo.play();
-        if (playPromise && typeof playPromise.catch === "function") {
-          playPromise.catch(() => {
-            /* ignore autoplay errors */
-          });
-        }
-      }
-    };
-
-    playlistVideo.muted = true;
-    playlistVideo.defaultMuted = true;
-    playlistVideo.loop = false;
-    playlistVideo.playsInline = true;
-    playlistVideo.preload = "none";
-
-    playCurrentClip(false);
-
-    playlistVideo.addEventListener("ended", () => {
-      currentClipIndex = (currentClipIndex + 1) % clips.length;
-      playCurrentClip(true);
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (playlistVideo.readyState < 2) {
-              playlistVideo.load();
-            }
-
-            const playPromise = playlistVideo.play();
-            if (playPromise && typeof playPromise.catch === "function") {
-              playPromise.catch(() => {
-                /* ignore autoplay errors */
-              });
-            }
-            return;
-          }
-
-          playlistVideo.pause();
-        });
-      },
-      {
-        threshold: 0.45,
-        rootMargin: "0px 0px -10% 0px"
-      }
-    );
-
-    observer.observe(playlistContainer);
   }
 
   function setupLeadForm() {
